@@ -27,7 +27,6 @@ A modern, responsive training course website built with **React (Vite)** + **Rea
 |----------|----------------|
 | ![Home Screenshot](./screenshots/home.png) | ![Detail Screenshot](./screenshots/detail.png) |
 
-> 💡 _Add your own screenshots in the `/screenshots/` folder for full preview._
 
 ---
 
