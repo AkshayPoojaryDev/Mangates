@@ -1,88 +1,109 @@
-// src/data/courses.js
-
-// 1️⃣ Import your course images
-import pythonImg from '../assets/python.png';
-import reactImg from '../assets/react.png';
-import dataScienceImg from '../assets/data-science.png';
-import blockchainImg from '../assets/blockchain.png';
-import marketingImg from '../assets/marketing.png';
-import cloudImg from '../assets/cloud.png';
-
-export const courses = [
-  {
-    id: 'python-basics',
-    title: 'Python Basics',
-    description: 'Learn the fundamentals of Python.',
-    longDescription:
-      'A deep dive into Python syntax, data structures, and practical applications.',
-    image: pythonImg,
-    duration: '6h 30m',
-    students: '8k+',
-    price: '$99',
-    instructor: {
-      name: 'Jane Doe',
-      title: 'Senior Python Developer',
-      photo: '/assets/jane.jpg', // if in public/assets
+const courses = [
+    {
+        id: 1,
+        title: "Introduction to Programming",
+        description: "Learn the basics of programming using JavaScript.",
+        duration: "4 weeks",
+        level: "Beginner"
     },
-    syllabus: [
-      { title: 'Intro & Setup', lessons: ['Installing Python', 'Hello World'] },
-      { title: 'Control Flow', lessons: ['if/else', 'loops'] },
-      // …add more modules
-    ],
-    reviews: [
-      { name: 'Alice', text: 'Great intro to Python!' },
-      { name: 'Bob', text: 'Very practical and hands‑on.' },
-    ],
-  },
-  {
-    id: 'react-advanced',
-    title: 'Advanced React',
-    description: 'Deep dive into React hooks and context.',
-    longDescription:
-      'Master React Hooks, Context API, and performance optimizations with real‑world examples.',
-    image: reactImg,
-    duration: '5h 45m',
-    students: '5k+',
-    price: '$119',
-    instructor: {
-      name: 'John Smith',
-      title: 'Lead Front‑end Engineer',
-      photo: '/assets/john.jpg',
+    {
+        id: 2,
+        title: "Web Development",
+        description: "Build modern and responsive websites using HTML, CSS, and JavaScript.",
+        duration: "6 weeks",
+        level: "Intermediate"
     },
-    syllabus: [
-      { title: 'Hooks Deep Dive', lessons: ['useState', 'useEffect', 'useContext'] },
-      { title: 'Performance', lessons: ['Memoization', 'Lazy Loading'] },
-      // …
-    ],
-    reviews: [
-      { name: 'Carol', text: 'Hooks explanations were top‑notch.' },
-      { name: 'Dan', text: 'Learned a lot about optimization!' },
-    ],
-  },
-  {
-    id: 'data-science-masterclass',
-    title: 'Data Science Masterclass',
-    description: 'Analyze data and build ML models.',
-    longDescription:
-      'From data cleaning to machine learning, get hands‑on with Python libraries like Pandas and scikit‑learn.',
-    image: dataScienceImg,
-    duration: '8h 10m',
-    students: '3k+',
-    price: '$149',
-    instructor: {
-      name: 'Emily Clark',
-      title: 'Data Scientist',
-      photo: '/assets/emily.jpg',
+    {
+        id: 3,
+        title: "Data Structures and Algorithms",
+        description: "Understand core data structures and algorithms for problem-solving.",
+        duration: "8 weeks",
+        level: "Advanced"
     },
-    syllabus: [
-      { title: 'Data Wrangling', lessons: ['Pandas', 'NumPy'] },
-      { title: 'Modeling', lessons: ['Linear Regression', 'Classification'] },
-      // …
-    ],
-    reviews: [
-      { name: 'Frank', text: 'Great coverage of Pandas!' },
-      { name: 'Grace', text: 'Models section was very clear.' },
-    ],
-  },
-  // …you can add more courses likewise
+    {
+        id: 4,
+        title: "React for Beginners",
+        description: "Learn how to build dynamic web applications using React.",
+        duration: "5 weeks",
+        level: "Beginner"
+    },
+    {
+        id: 5,
+        title: "Node.js and Express",
+        description: "Master backend development with Node.js and Express framework.",
+        duration: "7 weeks",
+        level: "Intermediate"
+    },
+    {
+        id: 6,
+        title: "Python for Data Science",
+        description: "Explore data analysis and visualization using Python.",
+        duration: "6 weeks",
+        level: "Beginner"
+    },
+    {
+        id: 7,
+        title: "Machine Learning Basics",
+        description: "Get started with machine learning concepts and techniques.",
+        duration: "8 weeks",
+        level: "Intermediate"
+    },
+    {
+        id: 8,
+        title: "Cloud Computing Fundamentals",
+        description: "Learn the basics of cloud computing and its applications.",
+        duration: "4 weeks",
+        level: "Beginner"
+    },
+    {
+        id: 9,
+        title: "Cybersecurity Essentials",
+        description: "Understand the fundamentals of cybersecurity and best practices.",
+        duration: "5 weeks",
+        level: "Intermediate"
+    },
+    {
+        id: 10,
+        title: "DevOps Practices",
+        description: "Learn the principles and tools for effective DevOps workflows.",
+        duration: "7 weeks",
+        level: "Advanced"
+    },
+    {
+        id: 11,
+        title: "Mobile App Development with Flutter",
+        description: "Build cross-platform mobile apps using Flutter and Dart.",
+        duration: "6 weeks",
+        level: "Intermediate"
+    },
+    {
+        id: 12,
+        title: "SQL for Beginners",
+        description: "Learn how to manage and query databases using SQL.",
+        duration: "4 weeks",
+        level: "Beginner"
+    },
+    {
+        id: 13,
+        title: "Artificial Intelligence Concepts",
+        description: "Explore the basics of AI and its real-world applications.",
+        duration: "8 weeks",
+        level: "Advanced"
+    },
+    {
+        id: 14,
+        title: "Kubernetes for Developers",
+        description: "Learn container orchestration with Kubernetes.",
+        duration: "6 weeks",
+        level: "Intermediate"
+    },
+    {
+        id: 15,
+        title: "Blockchain Basics",
+        description: "Understand the fundamentals of blockchain technology.",
+        duration: "5 weeks",
+        level: "Beginner"
+    }
 ];
+
+export default courses;
