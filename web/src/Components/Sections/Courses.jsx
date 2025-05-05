@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import datamaster from "../assets/DataMaster.png";
-import cloudImg from '../assets/cloud.png';
-import ai from '../assets/Ai&ML.png';
+import datamaster from "../../assets/DataMaster.png";
+import cloudImg from '../../assets/cloud.png';
+import ai from '../../assets/Ai&ML.png';
 const allCourses = [
   {
     title: "Data Science Master Program",

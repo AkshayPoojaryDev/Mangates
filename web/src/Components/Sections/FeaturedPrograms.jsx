@@ -1,7 +1,6 @@
-// FeaturedPrograms.js
-import data from '../assets/data-science.png';
-import digital from '../assets/digital.png';
-import project from '../assets/project.png';
+import data from '../../assets/data-science.png';
+import digital from '../../assets/digital.png';
+import project from '../../assets/project.png';
 import React from 'react';
 
 const FeaturedPrograms = () => {

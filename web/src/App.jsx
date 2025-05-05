@@ -1,12 +1,12 @@
-import Header from "./Components/Header";
-import Hero from "./Components/Hero";
-import Courses from "./components/Courses";
-import WhyChooseUs from "./components/CategoriesSection";
-import Footer from "./components/Footer";
-import PartnersSection from "./components/PartnersSection";
-import FeaturedPrograms from "./components/FeaturedPrograms";
-import Testimonials from "./components/Testimonials";
-import TopPrograms from "./components/TopPrograms";
+import Header from "./layout/Header";
+import Hero from "./Components/Sections/Hero";
+import Courses from "./Components/Sections/Courses";
+import WhyChooseUs from "./Components/Sections/CategoriesSection";
+import Footer from "./layout/Footer";
+import PartnersSection from "./Components/Sections/PartnersSection";
+import FeaturedPrograms from "./Components/Sections/FeaturedPrograms";
+import Testimonials from "./Components/Sections/Testimonials";
+import TopPrograms from "./Components/Sections/TopPrograms";
 
 function App() {
   return (

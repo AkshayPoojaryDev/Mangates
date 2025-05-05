@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import pythonImg from '../assets/python.png';
-import reactImg from '../assets/react.png';
-import dataScienceImg from '../assets/data-science.png';
-import blockchainImg from '../assets/blockchain.png';
- 
+import pythonImg from '../../assets/python.png';
+import reactImg from '../../assets/react.png';
+import dataScienceImg from '../../assets/data-science.png';
+import blockchainImg from '../../assets/blockchain.png';
+
 
 const programs = [
   {
