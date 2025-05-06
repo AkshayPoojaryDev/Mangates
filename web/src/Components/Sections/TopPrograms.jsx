@@ -1,45 +1,6 @@
 import React, { useState } from "react";
-import pythonImg from '../../assets/python.png';
-import reactImg from '../../assets/react.png';
-import dataScienceImg from '../../assets/data-science.png';
-import blockchainImg from '../../assets/blockchain.png';
-
-
-const programs = [
-  {
-    title: "PMP® Certification Training",
-    category: "Project Management",
-    duration: "4 Weeks",
-    cohortStart: "22nd Apr '25",
-    image: pythonImg,
-    logo: "\assets\homePage.png"
-  },
-  {
-    title: "Advanced Executive Program in Cybersecurity",
-    category: "Cyber Security",
-    duration: "6 Months",
-    cohortStart: "23rd Apr '25",
-    image:reactImg,
-    logo: "https://www.simplilearn.com/ice9/assets/iitb-logo.svg"
-  },
-  {
-    title: "Certified ScrumMaster (CSM)",
-    category: "Agile and Scrum",
-    duration: "3 Days",
-    cohortStart: "23rd Apr '25",
-    image: dataScienceImg,
-    logo: "https://www.simplilearn.com/ice9/assets/scrum-alliance-logo.svg"
-  },
-  {
-    title: "Data Analyst",
-    category: "Data Science & Business Analytics",
-    duration: "6 Months",
-    cohortStart: "24th Apr '25",
-    image:  blockchainImg,
-    logo: "https://www.simplilearn.com/ice9/assets/ibm-logo-white.svg"
-  },
-  // Add more here as needed
-];
+import { Link } from "react-router-dom";
+import { programs } from "../../data/programs";
 
 const categories = [
   "Most Popular",
@@ -70,7 +31,6 @@ const TopPrograms = () => {
           Explore Our Top Programs
         </h2>
         <div className="flex flex-col md:flex-row gap-10">
-          {/* Sidebar Filter */}
           <aside className="md:w-1/4">
             <div className="flex md:flex-col flex-wrap gap-2">
               {categories.map((cat, idx) => (
@@ -89,7 +49,6 @@ const TopPrograms = () => {
             </div>
           </aside>
 
-          {/* Programs Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
             {filteredPrograms.map((program, index) => (
               <div
@@ -108,12 +67,12 @@ const TopPrograms = () => {
                   <h3 className="text-lg font-bold text-blue-900 mb-2">{program.title}</h3>
                   <p className="text-sm text-gray-700">Duration: <strong>{program.duration}</strong></p>
                   <p className="text-sm text-gray-700">Cohort Starts: <strong>{program.cohortStart}</strong></p>
-                  <a
-                    href="#"
+                  <Link
+                    to={`/courses/${program.id}`}
                     className="block text-center border mt-4 text-blue-600 border-blue-600 hover:bg-blue-50 py-2 rounded text-sm font-medium"
                   >
                     View Program
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
