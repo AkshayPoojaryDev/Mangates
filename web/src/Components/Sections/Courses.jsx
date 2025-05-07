@@ -1,12 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import courses from "../../data/courses";
-import Header from "../../layout/Header"; // Assuming you have a Header component
+import { db } from "../../firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 
 const Courses = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("All");
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, "courses"));
+        const courseList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCourses(courseList);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
 
   const filteredCourses = courses.filter((course) => {
     const matchSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -17,37 +39,38 @@ const Courses = () => {
   const categories = ["All", ...new Set(courses.map((c) => c.category))];
 
   return (
-    <>
-       {/* Added Header component */}
-      <main className="py-20 bg-gray-50 min-h-screen">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl font-extrabold text-center text-blue-900 mb-10 tracking-tight">
-            Find the Perfect Program for You
-          </h2>
+    <main className="py-20 bg-gray-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-4xl font-extrabold text-center text-blue-900 mb-10 tracking-tight">
+          Find the Perfect Program for You
+        </h2>
 
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-12">
-            <input
-              type="text"
-              placeholder="Search by course name..."
-              className="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              aria-label="Search courses"
-            />
-            <select
-              className="w-full md:w-1/4 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              aria-label="Filter by category"
-            >
-              {categories.map((cat, index) => (
-                <option key={index} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-12">
+          <input
+            type="text"
+            placeholder="Search by course name..."
+            className="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            aria-label="Search courses"
+          />
+          <select
+            className="w-full md:w-1/4 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            aria-label="Filter by category"
+          >
+            {categories.map((cat, index) => (
+              <option key={index} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </div>
 
+        {loading ? (
+          <p className="text-center text-gray-500">Loading courses...</p>
+        ) : (
           <div className="grid gap-8 md:grid-cols-3 sm:grid-cols-2">
             {filteredCourses.length > 0 ? (
               filteredCourses.map((course, index) => (
@@ -91,11 +114,10 @@ const Courses = () => {
               </div>
             )}
           </div>
-        </div>
-      </main>
-    </>
+        )}
+      </div>
+    </main>
   );
 };
 
 export default Courses;
-    
