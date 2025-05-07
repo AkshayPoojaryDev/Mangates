@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import Header from "./layout/Header";
 import Hero from "./Components/Sections/Hero";
 import Courses from "./Components/Sections/Courses";
 import WhyChooseUs from "./Components/Sections/CategoriesSection";
@@ -8,12 +7,12 @@ import PartnersSection from "./Components/Sections/PartnersSection";
 import FeaturedPrograms from "./Components/Sections/FeaturedPrograms";
 import Testimonials from "./Components/Sections/Testimonials";
 import TopPrograms from "./Components/Sections/TopPrograms";
-import CourseDetail from "./Components/Sections/Courses";
+import CourseDetail from "./pages/CourseDetail"; // ✅ Corrected import
+import Layout from "./layout/Layout";
 
 function HomePage() {
   return (
     <>
-      <Header />
       <Hero />
       <Courses />
       <TopPrograms />
@@ -28,10 +27,9 @@ function HomePage() {
 
 function App() {
   return (
-   
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/course/:id" element={<CourseDetail />} />
+      <Route path="/" element={<Layout><HomePage /></Layout>} />
+      <Route path="/course/:id" element={<Layout><CourseDetail /></Layout>} />
     </Routes>
   );
 }

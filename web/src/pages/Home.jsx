@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { FaCheckCircle, FaQuoteLeft } from 'react-icons/fa';
 import CourseCard from '../Components/CourseCard';
 
-// 1️⃣ Import your images from src/assets
 import pythonImg from '../assets/python.png';
 import reactImg from '../assets/react.png';
 import dataScienceImg from '../assets/data-science.png';
@@ -12,7 +11,6 @@ import marketingImg from '../assets/marketing.png';
 import cloudImg from '../assets/cloud.png';
 
 const Home = () => {
-  // 2️⃣ Data arrays for each section
   const topCourses = [
     { id: 'python-basics', title: 'Python Basics', description: 'Learn Python fundamentals.', image: pythonImg, price: 99 },
     { id: 'react-advanced', title: 'Advanced React', description: 'Deep dive into React hooks and context.', image: reactImg, price: 119 },
@@ -40,8 +38,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="font-sans">
-
+    <>
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 text-white py-16 px-6 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
@@ -146,8 +143,7 @@ const Home = () => {
           </button>
         </Link>
       </section>
-
-    </div>
+    </>
   );
 };
 

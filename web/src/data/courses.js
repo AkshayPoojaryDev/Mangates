@@ -5,6 +5,7 @@ import pythonImg from "../assets/python.png";
 import reactImg from "../assets/react.png";
 import dataScienceImg from "../assets/data-science.png";
 import blockchainImg from "../assets/blockchain.png";
+
 const courses = [
   {
     id: "data-science-master-program",
@@ -15,6 +16,32 @@ const courses = [
     rating: 4.6,
     duration: "12 Months",
     tag: "Best Seller",
+    overview: "Master data science with Python, R, SQL, and real-world projects.",
+    features: [
+      "100+ hours of live sessions",
+      "Industry-relevant projects",
+      "Career mentorship and resume support"
+    ],
+    highlights: [
+      "Real-Time Projects",
+      "Capstone Projects",
+      "Career Coaching"
+    ],
+    curriculum: {
+      "Module 1: Introduction": [
+        "What is Data Science?",
+        "Applications of Data Science",
+        "Career Paths"
+      ],
+      "Module 2: Python & R": [
+        "Python for Data Analysis",
+        "R Programming Basics"
+      ],
+      "Module 3: Machine Learning": [
+        "Supervised and Unsupervised Learning",
+        "Model Evaluation"
+      ]
+    }
   },
   {
     id: "cloud-computing-certification",
@@ -24,7 +51,7 @@ const courses = [
     image: cloudImg,
     rating: 4.5,
     duration: "6 Months",
-    tag: "University Program",
+    tag: "University Program"
   },
   {
     id: "ai-ml-course",
@@ -34,7 +61,7 @@ const courses = [
     image: ai,
     rating: 4.7,
     duration: "8 Months",
-    tag: "Trending",
+    tag: "Trending"
   },
   {
     id: "pmp-certification-training",
@@ -45,6 +72,31 @@ const courses = [
     rating: 4.6,
     duration: "4 Weeks",
     tag: "Best Seller",
+    overview: "This PMP certification course prepares you for the PMP® exam and enhances your project management skills.",
+    features: [
+      "36 hours of live instructor-led sessions",
+      "29 hours of self-paced video content",
+      "8 simulation test papers"
+    ],
+    highlights: [
+      "Live Training",
+      "Simulation Tests",
+      "24x7 Support"
+    ],
+    curriculum: {
+      "Module 1: Project Management Basics": [
+        "Project Life Cycle",
+        "Stakeholder Management"
+      ],
+      "Module 2: Planning & Scheduling": [
+        "Scope Management",
+        "Time and Cost Management"
+      ],
+      "Module 3: Agile Methods": [
+        "Agile Overview",
+        "Scrum Framework"
+      ]
+    }
   },
   {
     id: "executive-program-cybersecurity",
@@ -54,7 +106,7 @@ const courses = [
     image: reactImg,
     rating: 4.7,
     duration: "6 Months",
-    tag: "University Program",
+    tag: "University Program"
   },
   {
     id: "certified-scrum-master",
@@ -64,7 +116,7 @@ const courses = [
     image: dataScienceImg,
     rating: 4.5,
     duration: "3 Days",
-    tag: "Trending",
+    tag: "Trending"
   },
   {
     id: "data-analyst-program",
@@ -74,7 +126,8 @@ const courses = [
     image: blockchainImg,
     rating: 4.8,
     duration: "6 Months",
-    tag: "Best Seller",
+    tag: "Best Seller"
   },
 ];
+
 export default courses;

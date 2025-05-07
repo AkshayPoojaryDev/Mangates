@@ -18,7 +18,7 @@ const Courses = () => {
 
   return (
     <>
-      <Header /> {/* Added Header component */}
+       {/* Added Header component */}
       <main className="py-20 bg-gray-50 min-h-screen">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-extrabold text-center text-blue-900 mb-10 tracking-tight">
