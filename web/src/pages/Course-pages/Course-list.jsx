@@ -8,12 +8,16 @@ const CourseList = () => {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTag, setSelectedTag] = useState("All");
+  const [showFilters, setShowFilters] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
       const querySnapshot = await getDocs(collection(db, "courses"));
-      const coursesData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const coursesData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setCourses(coursesData);
       setFilteredCourses(coursesData);
     };
@@ -24,11 +28,13 @@ const CourseList = () => {
     let updatedCourses = courses;
 
     if (selectedTag !== "All") {
-      updatedCourses = updatedCourses.filter(course => course.tag === selectedTag);
+      updatedCourses = updatedCourses.filter(
+        (course) => course.tag === selectedTag
+      );
     }
 
     if (searchTerm.trim()) {
-      updatedCourses = updatedCourses.filter(course =>
+      updatedCourses = updatedCourses.filter((course) =>
         course.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
@@ -36,38 +42,62 @@ const CourseList = () => {
     setFilteredCourses(updatedCourses);
   }, [searchTerm, selectedTag, courses]);
 
-  const uniqueTags = ["All", ...new Set(courses.map(course => course.tag))];
+  const uniqueTags = ["All", ...new Set(courses.map((course) => course.tag))];
 
   return (
     <div className="max-w-7xl mx-auto py-12 px-4">
-      <h1 className="text-4xl font-bold text-center text-blue-800 mb-10">
+      <h1 className="text-4xl font-bold text-center text-blue-800 mb-8">
         Explore Our Top Programs
       </h1>
 
-      {/* Search + Filter */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
-        <input
-          type="text"
-          placeholder="Search for a course..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+      {/* Mobile Filter Toggle */}
+      <div className="md:hidden flex justify-end mb-4">
+        <button
+          onClick={() => setShowFilters(!showFilters)}
+          className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg shadow"
+        >
+          {showFilters ? "Hide Filters" : "Show Filters"}
+        </button>
+      </div>
 
-        <div className="flex gap-2 overflow-x-auto">
-          {uniqueTags.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setSelectedTag(tag)}
-              className={`px-4 py-2 text-sm rounded-full border transition-all duration-300 ${
-                selectedTag === tag
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-blue-100"
-              }`}
+      {/* Filter Section (Animated) */}
+      <div
+        className={`overflow-hidden transition-all duration-500 ease-in-out ${
+          showFilters ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        } md:max-h-full md:opacity-100`}
+      >
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+          {/* Search Input */}
+          <div className="relative w-full md:w-1/2">
+            <input
+              type="text"
+              placeholder="Search for a course..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-5 py-3 pl-12 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+            />
+            <div className="absolute inset-y-0 left-3 flex items-center text-gray-400 text-lg">
+              <i className="fas fa-search"></i>
+            </div>
+          </div>
+
+          {/* Dropdown Select */}
+          <div className="relative w-full md:w-1/4">
+            <select
+              value={selectedTag}
+              onChange={(e) => setSelectedTag(e.target.value)}
+              className="w-full px-5 py-3 appearance-none border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-white"
             >
-              {tag}
-            </button>
-          ))}
+              {uniqueTags.map((tag) => (
+                <option key={tag} value={tag}>
+                  {tag}
+                </option>
+              ))}
+            </select>
+            <div className="absolute inset-y-0 right-4 flex items-center text-gray-500 pointer-events-none">
+              <i className="fas fa-chevron-down"></i>
+            </div>
+          </div>
         </div>
       </div>
 
