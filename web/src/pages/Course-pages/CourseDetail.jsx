@@ -1,23 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase"; // Adjust if path is different
+import { db } from "../../firebase";
+import { LoaderCircle } from "lucide-react";
+import TrainingTypeCards from "../../Components/Sections/TrainingTypeCards"
+import Highlights from "../../Components/Sections/Highlights";
+import CourseTabs from "../../Components/Sections/CourseTabs";
+import CourseOverview from "../../Components/Sections/CourseOverview"; // ✅ NEW
 
 const CourseDetail = () => {
-  const { id } = useParams();
+  const { courseId } = useParams();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const docRef = doc(db, "courses", id);
+        const docRef = doc(db, "courses", courseId);
         const docSnap = await getDoc(docRef);
-
         if (docSnap.exists()) {
           setCourse(docSnap.data());
         } else {
-          setCourse(null);
+          console.log("No such course!");
         }
       } catch (error) {
         console.error("Error fetching course:", error);
@@ -25,99 +29,39 @@ const CourseDetail = () => {
         setLoading(false);
       }
     };
-
     fetchCourse();
-  }, [id]);
+  }, [courseId]);
 
   if (loading) {
-    return <p className="text-center mt-20 text-gray-600">Loading...</p>;
-  }
-
-  if (!course) {
     return (
-      <div className="text-center mt-20 text-red-500 text-xl">
-        Course not found.
+      <div className="flex justify-center items-center h-screen">
+        <LoaderCircle className="animate-spin h-10 w-10 text-blue-600" />
       </div>
     );
   }
 
+  if (!course) {
+    return <div className="text-center py-10">Course not found.</div>;
+  }
+
   return (
-    <div className="w-full bg-white text-gray-800">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-900 to-blue-600 text-white p-8 md:p-16">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="max-w-xl">
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-              {course.title}
-            </h1>
-            <p className="text-lg mb-4">{course.description}</p>
-            <p className="text-md italic mb-2">Duration: {course.duration}</p>
-            <p className="text-md italic mb-2">Rating: {course.rating} ⭐</p>
-            <p className="text-sm bg-yellow-400 inline-block px-3 py-1 rounded-full text-black font-semibold mt-2">
-              {course.tag}
-            </p>
-
-            {Array.isArray(course.features) && course.features.length > 0 && (
-              <>
-                <h3 className="mt-6 text-xl font-semibold">Key Features:</h3>
-                <ul className="list-disc list-inside space-y-2">
-                  {course.features.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-              </>
-            )}
-
-            <button className="mt-6 bg-yellow-400 text-black font-semibold px-6 py-2 rounded hover:bg-yellow-300">
-              Enroll Now
-            </button>
-          </div>
-
-          <div className="bg-white p-2 rounded-2xl shadow-2xl border border-gray-200 hover:scale-105 transition-transform duration-300">
-            <img
-              src={course.image}
-              alt={course.title}
-              className="w-64 h-64 object-contain rounded-xl"
-            />
-          </div>
-        </div>
+    <div className="bg-gray-50">
+      <section className="bg-blue-600 text-white py-12 text-center">
+        <h1 className="text-4xl font-bold">{course.title}</h1>
+        <p className="mt-2 text-lg">{course.subtitle}</p>
       </section>
 
-      {/* Overview Section */}
-      {course.overview && (
-        <section className="max-w-7xl mx-auto py-12 px-4">
-          <h2 className="text-3xl font-bold mb-6">{course.title} Overview</h2>
-          <p className="text-lg mb-4">{course.overview}</p>
+      {/* ✅ Inserted Course Overview */}
+      <CourseOverview
+        duration={course.duration}
+        level={course.level}
+        rating={course.rating}
+        overview={course.overview}
+      />
 
-          {Array.isArray(course.highlights) && course.highlights.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
-              {course.highlights.map((item, i) => (
-                <div key={i} className="bg-gray-100 p-4 rounded shadow">
-                  {item}
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
-      )}
-
-      {/* Curriculum Section */}
-      {course.curriculum && typeof course.curriculum === "object" && (
-        <section className="bg-gray-50 py-12 px-4">
-          <div className="max-w-7xl mx-auto">
-            <h3 className="text-2xl font-bold mb-6">Curriculum</h3>
-            {Object.entries(course.curriculum).map(([module, topics], i) => (
-              <div key={i} className="mb-6">
-                <h4 className="text-xl font-semibold mb-2">{module}</h4>
-                <ul className="list-disc list-inside space-y-1">
-                  {Array.isArray(topics) &&
-                    topics.map((topic, idx) => <li key={idx}>{topic}</li>)}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      <TrainingTypeCards />
+      <Highlights highlights={course.highlights} />
+      <CourseTabs course={course} />
     </div>
   );
 };
