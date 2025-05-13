@@ -19,12 +19,13 @@ const Header = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
-            <Link to="/courses" className="hover:text-blue-600 transition">Courses</Link>
-            <Link to="/bootcamps" className="hover:text-blue-600 transition">Bootcamps</Link>
-            <Link to="/universities" className="hover:text-blue-600 transition">Universities</Link>
-            <Link to="/resources" className="hover:text-blue-600 transition">Resources</Link>
-          </nav>
+<nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
+  <Link to="/courses" className="hover:text-blue-600 transition">Courses</Link>
+  <Link to="/bootcamps" className="hover:text-blue-600 transition">Bootcamps</Link>
+  <Link to="/universities" className="hover:text-blue-600 transition">Universities</Link>
+  <Link to="/resources" className="hover:text-blue-600 transition">Resources</Link>
+  <Link to="/admin" className="hover:text-red-600 transition font-semibold text-red-500">Admin</Link> {/* 👈 Added */}
+</nav>
 
           {/* Buttons */}
           <div className="hidden md:flex items-center gap-4">
