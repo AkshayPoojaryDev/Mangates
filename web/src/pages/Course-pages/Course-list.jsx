@@ -1,31 +1,63 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import { FaSearch, FaChevronDown } from "react-icons/fa";
 
+// Course Card Component
+const CourseCard = ({ course, onClick }) => (
+  <div
+    onClick={onClick}
+    className="cursor-pointer border rounded-lg p-4 shadow hover:shadow-lg transform hover:scale-105 transition duration-300 bg-white"
+  >
+    <img
+      src={course.image || "/default-course.png"}
+      alt={course.title}
+      className="w-full h-48 object-contain rounded mb-4"
+    />
+    <h3 className="text-xl font-semibold text-blue-800 mb-2">
+      {course.title}
+    </h3>
+    <p className="text-gray-600 text-sm mb-2 line-clamp-2">
+      {course.description}
+    </p>
+    <div className="text-sm text-gray-500 italic mb-1">
+      Duration: {course.duration}
+    </div>
+    <div className="text-sm text-yellow-600 font-medium">
+      {course.rating} ⭐
+    </div>
+  </div>
+);
+
+// Main Component
 const CourseList = () => {
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTag, setSelectedTag] = useState("All");
   const [showFilters, setShowFilters] = useState(false);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      const querySnapshot = await getDocs(collection(db, "courses"));
-      const coursesData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setCourses(coursesData);
-      setFilteredCourses(coursesData);
-    };
-    fetchCourses();
+  const fetchCourses = useCallback(async () => {
+    setLoading(true);
+    const querySnapshot = await getDocs(collection(db, "courses"));
+    const coursesData = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setCourses(coursesData);
+    setFilteredCourses(coursesData);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
-    let updatedCourses = courses;
+    fetchCourses();
+  }, [fetchCourses]);
+
+  useEffect(() => {
+    let updatedCourses = [...courses];
 
     if (selectedTag !== "All") {
       updatedCourses = updatedCourses.filter(
@@ -60,7 +92,7 @@ const CourseList = () => {
         </button>
       </div>
 
-      {/* Filter Section (Animated) */}
+      {/* Filter Section */}
       <div
         className={`overflow-hidden transition-all duration-500 ease-in-out ${
           showFilters ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
@@ -77,7 +109,7 @@ const CourseList = () => {
               className="w-full px-5 py-3 pl-12 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
             />
             <div className="absolute inset-y-0 left-3 flex items-center text-gray-400 text-lg">
-              <i className="fas fa-search"></i>
+              <FaSearch />
             </div>
           </div>
 
@@ -95,41 +127,25 @@ const CourseList = () => {
               ))}
             </select>
             <div className="absolute inset-y-0 right-4 flex items-center text-gray-500 pointer-events-none">
-              <i className="fas fa-chevron-down"></i>
+              <FaChevronDown />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Course Cards */}
-      {filteredCourses.length === 0 ? (
+      {/* Course Grid or Message */}
+      {loading ? (
+        <p className="text-center text-gray-500 mt-20">Loading courses...</p>
+      ) : filteredCourses.length === 0 ? (
         <p className="text-center text-gray-500 mt-20">No courses found.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {filteredCourses.map((course) => (
-            <div
+            <CourseCard
               key={course.id}
+              course={course}
               onClick={() => navigate(`/course/${course.id}`)}
-              className="cursor-pointer border rounded-lg p-4 shadow hover:shadow-md transition-shadow duration-300 bg-white"
-            >
-              <img
-                src={course.image}
-                alt={course.title}
-                className="w-full h-48 object-contain rounded mb-4"
-              />
-              <h3 className="text-xl font-semibold text-blue-800 mb-2">
-                {course.title}
-              </h3>
-              <p className="text-gray-600 text-sm mb-2 line-clamp-2">
-                {course.description}
-              </p>
-              <div className="text-sm text-gray-500 italic mb-1">
-                Duration: {course.duration}
-              </div>
-              <div className="text-sm text-yellow-600 font-medium">
-                {course.rating} ⭐
-              </div>
-            </div>
+            />
           ))}
         </div>
       )}

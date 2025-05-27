@@ -37,7 +37,8 @@ const CourseForm = () => {
 
   const handleFaqChange = (index, key, value) => {
     setFormData((prev) => {
-      const newFaqs = [...prev.faqs];
+      const newFaqs = [...prev.faqs];c 
+      
       newFaqs[index] = { ...newFaqs[index], [key]: value };
       return { ...prev, faqs: newFaqs };
     });

@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./layout/Layout";
 import Home from "./pages/Home";
 import CourseDetail from "./pages/Course-pages/CourseDetail";
-import CourseList from "./pages/Course-pages/Course-list";
+import CourseList from "./pages/Course-pages/Course-list"
 import AddCourse from "./Admin-Pages/pages/AddCourse"
 import ManageCourses from "./Admin-Pages/pages/ManageCourses"
 import AdminDashboard from "./Admin-Pages/pages/AdminDashboard";

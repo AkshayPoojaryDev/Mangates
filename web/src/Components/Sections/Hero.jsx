@@ -10,38 +10,45 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="bg-gradient-to-r from-blue-50 to-white py-16">
-      <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }} 
-          animate={{ opacity: 1, y: 0 }} 
+    <section
+      className="bg-gradient-to-r from-blue-50 to-white py-20"
+      aria-label="Hero Section"
+    >
+      <div className="max-w-7xl mx-auto px-4 flex flex-col-reverse md:flex-row items-center gap-12">
+        {/* Text Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="w-full md:w-1/2"
         >
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6 text-blue-900">
-            Learn the skills of tomorrow, today
+          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6 text-blue-900">
+            Learn the Skills of Tomorrow, Today
           </h1>
-          <p className="text-gray-600 mb-6">
-            Online Bootcamps | University Programs | Certification Courses
+          <p className="text-gray-700 text-lg mb-6">
+            Online Bootcamps · University Programs · Certification Courses
           </p>
-          <button 
+          <button
             onClick={handleExploreClick}
-            className="bg-blue-600 text-white px-6 py-3 rounded text-sm hover:bg-blue-700 transition-colors duration-300"
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
+            aria-label="Explore Programs"
           >
             Explore Programs
           </button>
         </motion.div>
 
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }} 
-          animate={{ opacity: 1, scale: 1 }} 
+        {/* Image Section */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="w-full md:w-1/2 mt-8 md:mt-0"
+          className="w-full md:w-1/2"
         >
-          <img 
-            src="/imgs/homePage.png" 
-            alt="Learning Banner" 
-            className="w-full rounded-xl shadow-lg" 
+          <img
+            src="/imgs/homePage.png"
+            alt="Online learning illustration"
+            className="w-full rounded-xl shadow-lg object-cover"
+            loading="lazy"
           />
         </motion.div>
       </div>
